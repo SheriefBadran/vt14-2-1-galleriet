@@ -13,5 +13,10 @@ namespace Gallery
         {
 
         }
+
+        protected void UpLoadButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
