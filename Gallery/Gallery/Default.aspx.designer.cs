@@ -22,6 +22,15 @@ namespace Gallery {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// Repeater1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        
+        /// <summary>
         /// ValidationSummary control.
         /// </summary>
         /// <remarks>
@@ -31,12 +40,21 @@ namespace Gallery {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
         
         /// <summary>
-        /// UpLoadButton control.
+        /// FileUploadButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpLoadButton;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadButton;
+        
+        /// <summary>
+        /// UploadButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UploadButton;
     }
 }

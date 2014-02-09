@@ -38,3 +38,9 @@ hr {
     min-width: 300px;
     margin: 5% auto;
 }
+
+.upLoad:after {
+    padding-left: 10px;
+    content: "Ingen fil har valts";
+    background-color: #fff;
+}

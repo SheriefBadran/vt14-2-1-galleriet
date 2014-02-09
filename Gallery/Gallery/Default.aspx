@@ -14,15 +14,21 @@
         <hr />
 
         <form id="form1" runat="server">
+            <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>
+            <%--<asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>--%>
+            <%-- PANEL FOR UPLOAD AND BROWSING --%>
             <asp:Panel runat="server" Visible="true">
+
                 <%-- VALIDATION SUMMARY --%>
                 <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel!!" DisplayMode="BulletList" />
 
 
-                <%-- POST BUTTON --%>
+                <%-- UPLOAD BUTTON --%>
                 <div class="formItems">
-                    <asp:Button ID="UpLoadButton" runat="server" Text="Ladda upp" OnClick="UpLoadButton_Click" />
+                    <asp:FileUpload ID="FileUploadButton" Text="Välj fil" CssClass="upLoad" runat="server" />
+                    <asp:Button ID="UploadButton" runat="server" Text="Ladda upp" OnClick="UploadButton_Click" />
                 </div>
+
             </asp:Panel>
         </form>
 
