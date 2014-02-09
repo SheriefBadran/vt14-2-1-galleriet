@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gallery.Model;
+using System.Collections;
 
 namespace Gallery
 {
@@ -18,6 +19,7 @@ namespace Gallery
         protected void UploadButton_Click(object sender, EventArgs e)
         {
             string path = PhotoGallery.GetImagePath();
+            PhotoGallery.GetImagesNames();
         }
     }
 
