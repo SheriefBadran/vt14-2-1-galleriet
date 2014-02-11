@@ -14,8 +14,24 @@
         <hr />
 
         <form id="form1" runat="server">
-            <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>
-            <%--<asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>--%>
+
+            <%-- ThumbNail Repeater --%>
+            <asp:Repeater ID="ThumbNailRepeater" runat="server" ItemType="System.String" SelectMethod="ThumbNailRepeater_GetData" >
+                <HeaderTemplate>
+                    <div id="thumbNails">
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <asp:HyperLink ID="HyperLink" runat="server" NavigateUrl='<%#"?name=" + Item %>' ImageUrl='<% #"~/Content/ThumbNails/" + Item %>' CssClass="" />
+                    <%--</asp:HyperLink>--%>
+                    <%-- NavigateUrl --%>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </div>
+                </FooterTemplate>
+            </asp:Repeater>
+            
+
+
             <%-- PANEL FOR UPLOAD AND BROWSING --%>
             <asp:Panel runat="server" Visible="true">
 
@@ -25,7 +41,7 @@
 
                 <%-- UPLOAD BUTTON --%>
                 <div class="formItems">
-                    <asp:FileUpload ID="FileUploadButton" Text="Välj fil" CssClass="upLoad" runat="server" />
+                    <asp:FileUpload ID="FileUpload" CssClass="upLoad" runat="server" />
                     <asp:Button ID="UploadButton" runat="server" Text="Ladda upp" OnClick="UploadButton_Click" />
                 </div>
 
