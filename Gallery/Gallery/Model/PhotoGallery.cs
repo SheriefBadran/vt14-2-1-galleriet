@@ -11,12 +11,11 @@ namespace Gallery.Model
 {
     public class PhotoGallery
     {
-
         // Private Fields
         private readonly static Regex ApprovedExtensions;
         private readonly static string PhysicalUploadedImagesPath;
         private readonly static string PhysicalThumbNailImagePath;
-        private readonly static Regex SantizePath;
+        private readonly static Regex SantizeFileName;
         private readonly static DirectoryInfo _DirectoryInfo;
         //private static List<string> _fileNames;
 
@@ -26,7 +25,7 @@ namespace Gallery.Model
 
             PhysicalUploadedImagesPath = Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Content\Images");
             PhysicalThumbNailImagePath = Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Content\ThumbNails");
-            SantizePath = new Regex(string.Format("[{0}]", Regex.Escape(new string(Path.GetInvalidFileNameChars()))));
+            SantizeFileName = new Regex(string.Format("[{0}]", Regex.Escape(new string(Path.GetInvalidFileNameChars()))));
             ApprovedExtensions = new Regex("[^\\s]+(\\.(?i)(jpg|png|gif))$");
             _DirectoryInfo = new DirectoryInfo(PhysicalUploadedImagesPath);
             //_fileNames = new List<string>(50);
@@ -36,7 +35,7 @@ namespace Gallery.Model
         
 
         // Methods
-        public IEnumerable<string> GetImagesNames()
+        public IEnumerable<string> GetImageNames()
         {
             //_fileNames.TrimExcess();
             // FileSystemInfo
@@ -58,9 +57,9 @@ namespace Gallery.Model
             //&& !SantizePath.IsMatch(PhysicalUploadedImagesPath)
         }
 
-        public static bool ImageExists(string path)
+        public bool ImageExists(string fileName)
         {
-            return File.Exists(path);
+            return File.Exists(Path.Combine(PhysicalUploadedImagesPath, fileName));
             //return DirectoryInfo.GetFiles().Any(fn => fn.Name == name);
         }
 
@@ -73,20 +72,47 @@ namespace Gallery.Model
 
         public string SaveImage(Stream stream, string fileName)
         {
-            var image = System.Drawing.Image.FromStream(stream);
-            var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
+            SantizeFileName.Replace(fileName, String.Empty);
 
-            if (IsValidImage(image))
+            if (ImageExists(fileName))
             {
-                image.Save(Path.Combine(PhysicalUploadedImagesPath, fileName));
+                var extension = Path.GetExtension(fileName);
+                var imageName = Path.GetFileNameWithoutExtension(fileName);
+
+                int i = 0;
+                do
+                {
+                    fileName = String.Format("{0}{1}{2}", imageName, i, extension);
+                    i++;
+                } while (ImageExists(fileName));
+            }
+
+            if (ApprovedExtensions.IsMatch(fileName))
+            {
+                //try
+                //{
+                    var image = System.Drawing.Image.FromStream(stream);
+                    var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
+
+                    if (IsValidImage(image))
+                    {
+                        image.Save(Path.Combine(PhysicalUploadedImagesPath, fileName));
+                        thumbnail.Save(Path.Combine(PhysicalThumbNailImagePath, fileName));
+                    }
+                    else
+                    {
+                        throw new ApplicationException("Detta är inte en gif, png eller jpg.");
+                    }
+                //}
+                //catch (Exception)
+                //{ 
+                //    throw new ApplicationException("Ett oväntat fel har inträffat! Korrigera felet och försök igen.");
+                //}
             }
             else
             {
-                throw new ApplicationException("Fel! Filen är inte en bild av rätt format.");
+                throw new ApplicationException("Filen är inte en bild av rätt format.");
             }
-
-            thumbnail.Save(Path.Combine(PhysicalThumbNailImagePath, fileName));
-            //thumbnail.Save(Path.Combine(string.Format("{0}\\{1}\\{2}", PhysicalUploadedImagePath, fileName)));
 
             return fileName;
         }

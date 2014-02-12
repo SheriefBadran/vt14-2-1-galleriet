@@ -22,6 +22,15 @@ namespace Gallery {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// LiteralSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LiteralSuccess;
+        
+        /// <summary>
         /// Image control.
         /// </summary>
         /// <remarks>
@@ -65,5 +74,14 @@ namespace Gallery {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button UploadButton;
+        
+        /// <summary>
+        /// RequiredFieldValidatorFileUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFileUpload;
     }
 }

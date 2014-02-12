@@ -15,9 +15,13 @@
 
         <form id="form1" runat="server">
 
+            <div id="confirmSuccess">
+                <asp:Literal ID="LiteralSuccess" runat="server" />
+            </div>
+
             <%-- Image Control --%>
             <div id="imageView">
-                <asp:Image ID="Image" Width="800" runat="server" />
+                <asp:Image ID="Image" Width="800" runat="server" Visible="false" />
             </div>
 
             <%-- ThumbNail Repeater --%>
@@ -26,8 +30,7 @@
                     <div id="thumbNails">
                 </HeaderTemplate>
                 <ItemTemplate>
-                    <asp:HyperLink ID="HyperLink" runat="server" NavigateUrl='<%#"?name=" + Item %>' ImageUrl='<% #"~/Content/ThumbNails/" + Item %>' CssClass="" />
-                    <%--</asp:HyperLink>--%>
+                    <asp:HyperLink ID="HyperLink" runat="server" NavigateUrl='<%#"?name=" + Item %>' ImageUrl='<% #"~/Content/ThumbNails/" + Item %>' />
                 </ItemTemplate>
                 <FooterTemplate>
                     </div>
@@ -40,13 +43,16 @@
             <asp:Panel CssClass="uploadPanel" runat="server" Visible="true">
 
                 <%-- VALIDATION SUMMARY --%>
-                <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel!!" DisplayMode="BulletList" />
+                <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel!" DisplayMode="BulletList" />
 
 
                 <%-- UPLOAD BUTTON --%>
                 <div class="formItems">
                     <asp:FileUpload ID="FileUpload" CssClass="upLoad" runat="server" />
                     <asp:Button ID="UploadButton" runat="server" Text="Ladda upp" OnClick="UploadButton_Click" />
+
+                    <%-- Validation --%>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorFileUpload" runat="server" ErrorMessage="Ingen fil har valts." Display="Dynamic" ControlToValidate="FileUpload"></asp:RequiredFieldValidator>
                 </div>
 
             </asp:Panel>

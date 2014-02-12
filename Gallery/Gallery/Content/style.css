@@ -48,7 +48,7 @@ hr {
 #thumbNails {
     text-align: center;
     margin-bottom: 20px;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #imageView {
@@ -58,4 +58,16 @@ hr {
 .uploadPanel {
     margin-left: 2%;
     margin-bottom: 10px;
+}
+
+#confirmSuccess {
+    position: absolute;
+    top: 20px;
+    left: 300px;
+    background-color: green;
+    width: 200px;
+    height: 50px;
+    z-index: 100;
+    text-align: center;
+    border-radius: 2px;
 }
