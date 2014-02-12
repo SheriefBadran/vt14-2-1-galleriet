@@ -15,6 +15,11 @@
 
         <form id="form1" runat="server">
 
+            <%-- Image Control --%>
+            <div id="imageView">
+                <asp:Image ID="Image" Width="800" runat="server" />
+            </div>
+
             <%-- ThumbNail Repeater --%>
             <asp:Repeater ID="ThumbNailRepeater" runat="server" ItemType="System.String" SelectMethod="ThumbNailRepeater_GetData" >
                 <HeaderTemplate>
@@ -23,7 +28,6 @@
                 <ItemTemplate>
                     <asp:HyperLink ID="HyperLink" runat="server" NavigateUrl='<%#"?name=" + Item %>' ImageUrl='<% #"~/Content/ThumbNails/" + Item %>' CssClass="" />
                     <%--</asp:HyperLink>--%>
-                    <%-- NavigateUrl --%>
                 </ItemTemplate>
                 <FooterTemplate>
                     </div>
@@ -33,7 +37,7 @@
 
 
             <%-- PANEL FOR UPLOAD AND BROWSING --%>
-            <asp:Panel runat="server" Visible="true">
+            <asp:Panel CssClass="uploadPanel" runat="server" Visible="true">
 
                 <%-- VALIDATION SUMMARY --%>
                 <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel!!" DisplayMode="BulletList" />

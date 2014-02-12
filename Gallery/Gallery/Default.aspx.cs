@@ -16,12 +16,16 @@ namespace Gallery
 
         public PhotoGallery photoGallery 
         { 
-            get { return _photoGallery ?? (_photoGallery = new PhotoGallery()); } 
+            get { return _photoGallery ?? (_photoGallery = new PhotoGallery()); }
         }
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Empty
+            // Retrieve the image name from url
+            string image = Request.QueryString["name"];
+
+            // Set imageUrl with a relative path to the image to view.
+            Image.ImageUrl = "Content/Images/" + image;
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)

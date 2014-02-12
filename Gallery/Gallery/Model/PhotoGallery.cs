@@ -24,8 +24,8 @@ namespace Gallery.Model
         static PhotoGallery()
         {
 
-            PhysicalUploadedImagesPath = Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), "Content\\Images");
-            PhysicalThumbNailImagePath = Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), "Content\\ThumbNails");
+            PhysicalUploadedImagesPath = Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Content\Images");
+            PhysicalThumbNailImagePath = Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Content\ThumbNails");
             SantizePath = new Regex(string.Format("[{0}]", Regex.Escape(new string(Path.GetInvalidFileNameChars()))));
             ApprovedExtensions = new Regex("[^\\s]+(\\.(?i)(jpg|png|gif))$");
             _DirectoryInfo = new DirectoryInfo(PhysicalUploadedImagesPath);
@@ -48,6 +48,7 @@ namespace Gallery.Model
                 .OrderBy(fn => fn)
                 .ToList();
 
+
             return _fileNames.AsReadOnly();
 
             //if (_fileNames.Count > 0) { return _fileNames.AsReadOnly(); }
@@ -65,7 +66,9 @@ namespace Gallery.Model
 
         public bool IsValidImage(Image image)
         {
-            return image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Gif.Guid;
+            return image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Gif.Guid
+                || image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Png.Guid
+                || image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Jpeg.Guid;
         }
 
         public string SaveImage(Stream stream, string fileName)
